@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function salarioFoda() {
+            var codigo = parseInt(document.getElementById('cod').value);
+            var horas = parseInt(document.getElementById('horas').value);
+            var turno = document.getElementById('turno').value.toLowerCase();
+            var categoria = document.getElementById('cat').value.toLowerCase();
+            var salmin = parseInt(document.getElementById('salmin').value);
+
+            if (categoria == 'f') {
+                switch(turno) {
+                    case 'n':
+                        valhora = 0.15 * salmin
+                        break
+                    case 'm':
+                    valhora = 0.1 * salmin
+                    break
+                    case 'v':
+                        valhora = 0.12 * salmin
+                        break
+                }
+            }
+            else if (categoria == 'g') {
+                switch(turno) {
+                    case 'n':
+                        valhora = 0.3 * salmin
+                        break
+                    case 'm':
+                    valhora = 0.2 * salmin
+                    break
+                    case 'v':
+                        valhora = 0.25 * salmin
+                        break
+                 }
+            }
+            else {
+                alert("Insira uma categoria válida")
+                return
+            }
+            salini = horas * valhora
+            valeal = 0
+            if (salini <= 800) {
+                valeal = salini * 0.25
+            }
+            else if (salini > 800 && salini <= 1200) {
+                valeal = salini * 0.2
+            }
+            else {
+                valeal = salini * 0.15
+            }
+            salfin = salini + valeal
+            alert("Olá Funcionario de Código: " + codigo + " você trabalhou: " + horas + " Horas e o valor de sua hora é: " + valhora + " seu salário inicial é de: " + salini + " R$ e o auxilio alimentação é de: " + valeal + " R$ seu salário total é de: " + salfin + " R$")
+        }
+    </script>
+</head>
+<body>
+    <form action="/enviar" method="post">
+        <label for="codigo" >Codígo do Funcionario</label><br>
+        <input type="number" id="cod" name="Codigo" title="Codígo do Funcionario" placeholder="Codígo do Funcionario"><br>
+
+        <label for="horas" >Horas Trabalhadas:</label><br>
+        <input type="number" id="horas" name="horas" title="Horas Trabalhadas:" placeholder="Horas Trabalhadas:"><br>
+
+        <label for="turno" >Turno Trabalhado: </table></label><br>
+        <input type="text" id="turno" name="turno" title="Turno Trabalhado: " placeholder="Turno Trabalhado:"><br>
+
+        <label for="categoria" >categoria do Funcionario: </label><br>
+        <input type="text" id="cat" name="cat" title="categoria do Funcionario" placeholder="categoria do Funcionario"><br>
+
+        <label for="salmin" >Valor do Salario Minimo: </label><br>
+        <input type="number" id="salmin" name="Salario Minimo" title="Insira Salario Minimo" placeholder="Salario Minimo"><br>
+
+        <input type="button" value="Calcular" onclick="salarioFoda()">
+    </form>
+</body>
+</html>

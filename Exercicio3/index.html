@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function checar_nota(nota){
+            return nota >= 0 && nota <= 10;
+        }
+        function checar_peso(peso){
+            return Number.isInteger(peso);
+        }
+        function classificar_media(media){
+            if (media < 5){
+                return "F";
+            }
+            else if (media >= 5 && media < 6){
+                return "E";
+            }
+            else if (media >= 6 && media < 7){
+                return "D";
+            }
+            else if (media >= 7 && media < 8){
+                return "C";
+            }
+            else if (media >= 8 && media < 9){
+                return "B";
+            }
+            else{
+                return "A";
+            }
+            
+        }
+        function calcular_media(){
+            var nome = document.getElementById("Nome").value;
+            
+            var nota1 = parseFloat(document.getElementById("Nota1").value);
+            var peso1 = parseFloat(document.getElementById("PNota1").value);
+
+            var nota2 = parseFloat(document.getElementById("Nota2").value);
+            var peso2 = parseFloat(document.getElementById("PNota2").value);
+
+            var nota3 = parseFloat(document.getElementById("Nota3").value);
+            var peso3 = parseFloat(document.getElementById("PNota3").value);
+
+            if (!checar_nota(nota1) || !checar_nota(nota2) || !checar_nota(nota3)){
+                alert("Todas as notas devem estar entre 0 e 10");
+                return;
+            }
+
+            if (!checar_peso(peso1) || !checar_peso(peso2) || !checar_peso(peso3)){
+                alert("Todos os pesos devem ser numeros inteiros");
+                return;
+            }
+
+            var somapeso = peso1 + peso2 + peso3;
+            var media = (nota1 * peso1 + nota2 * peso2 + nota3 * peso3) / somapeso;
+
+            alert(nome + " possui uma media igual a " + media.toFixed(2) + "\nSendo classificado como: " + classificar_media(media));
+        }
+    </script>
+</head>
+<body>
+    <h1>Notas</h1>
+    <form action="/enviar" method="post">
+        <label for="Nome" >Nome:</label><br>
+        <input type="text" id="Nome" name="Nome"><br>
+
+        <label for="Nota1" >Nota 1:</label><br>
+        <input type="text" id="Nota1" name="Nota1"><br>
+
+        <label for="Nota1" >Peso Nota 1:</label><br>
+        <input type="text" id="PNota1" name="PNota1"><br>
+
+        <label for="Nota2" >Nota 2:</label><br>
+        <input type="text" id="Nota2" name="Nota2"><br>
+
+        <label for="Nota1" >Peso Nota 2:</label><br>
+        <input type="text" id="PNota2" name="PNota2"><br>
+
+        <label for="Nota3" >Nota 3:</label><br>
+        <input type="text" id="Nota3" name="Nota3"><br>
+
+        <label for="Nota1" >Peso Nota 3:</label><br>
+        <input type="text" id="PNota3" name="PNota3"><br>
+
+        <input type="button" value="Calcular" onclick="calcular_media()">
+</body>
+</html>

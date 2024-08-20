@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calculoFrete() {
+        var peca = parseInt(document.getElementById('peca').value);
+        var rast = document.getElementById('rast').value.toLowerCase();
+        var reg = parseInt(document.getElementById('reg').value);
+        var dist = parseInt(document.getElementById('dist').value);
+ 
+        var frete = 0;
+        var freteTotal = 0;
+        var desconto = 0;
+        if (reg == 1) {
+            frete = 1.20
+            desconto = 0.12
+        } else if (reg == 2) {
+            frete = 1.10
+            desconto = 0.10
+        } else if (reg == 3) {
+            frete = 1.15
+            desconto = 0.08
+        }
+        var i = 0;
+        for (var i  = 0; i < peca; i++) {
+            if(i >= 1000) {
+                frete -= frete * desconto
+            }
+            freteTotal += frete
+        }
+        if (rast == 'sim') {
+            freteTotal = freteTotal + 200;
+        }
+        else if ( rast !== 'nao') {
+            alert("Insira apenas 'sim' ou 'nao'")
+            return
+        }
+        var comb = dist * 6.13;
+        freteTotal += comb
+        alert('O valor do frete é de R$: ' + freteTotal.toFixed(2) + ', incluindo R$: ' + comb.toFixed(2) + ' de combustível e ' + (rast === 'sim' ? 'com' : 'sem') + ' rastreamento.');
+    }
+    </script>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+        <h1>FRETE</h1>
+        <form action="/enviar" method="post">
+            <label for="Nome" >Número de Peças:</label><br>
+            <input type="number" id="peca" name="Nome" title="Digite o número de peças" placeholder="Número de Peças"><br>
+    
+            <label for="rastreamento" >Deseja rastreamento na entrega?:</label><br>
+            <input type="text" id="rast" name="rastreamento" title="deseja rastreamento na entrega?" placeholder="rastreamento"><br>
+    
+            <label for="regiao" >Qual a região da entrega?:</label><br>
+            <input type="text" id="reg" name="regiao" title="qual a região da entrega?" placeholder="regiao"><br>
+            <p>Região 1: Sudeste</p><p>Região 2: Sul</p><p>Região 3: Centro-Oeste</p>
+            <label for="distancia" >digite a distância em quilometros:</label><br>
+            <input type="number" id="dist" name="distancia" title="digite a distancia em quilometros" placeholder="distancia"><br>
+    
+            <input type="button" value="Calcular" onclick="calculoFrete()">
+        </form>
+    </div>
+</body>
+</html>
